@@ -1,0 +1,27 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "standard-with-typescript",
+      "plugin:prettier/recommended"
+    ],
+    "overrides": [],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      // Regra para forçar o uso de ponto e vírgula
+      "semi": ["error", "always"],
+  
+      // Regra para forçar aspas simples
+      "quotes": ["error", "single"]
+    }
+  }
+  
