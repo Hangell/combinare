@@ -13,7 +13,7 @@
 * [Description](#Description)
 * [Installation](#Installation)
 * [Usage](#Usage)
-* [Generating Unique Combinations of Numbers](#Generating Unique Combinations of Numbers)
+* [Generating Unique Combinations of Numbers](#Generating_Unique_Combinations_of_Numbers)
 * [Generating Unique Combinations of Arrays](#Generating Unique Combinations of Arrays)
 * [Generating Unique Combinations of Objects](#Generating Unique Combinations of Objects)
 * [Sorting an Array of Objects](#Sorting an Array of Objects)
