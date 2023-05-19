@@ -14,10 +14,10 @@
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [Generating Unique Combinations of Numbers](#Generating_Unique_Combinations_of_Numbers)
-* [Generating Unique Combinations of Arrays](#Generating Unique Combinations of Arrays)
-* [Generating Unique Combinations of Objects](#Generating Unique Combinations of Objects)
-* [Sorting an Array of Objects](#Sorting an Array of Objects)
-* [Curiosity about the name Combinare](#Curiosity about the name Combinare)
+* [Generating Unique Combinations of Arrays](#Generating_Unique_Combinations_of_Arrays)
+* [Generating Unique Combinations of Objects](#Generating_Unique_Combinations_of_Objects)
+* [Sorting an Array of Objects](#Sorting_an_Array_of_Objects)
+* [Curiosity about the name Combinare](#Curiosity_about_the_name_Combinare)
 * [Contributing](#Contributing)
 * [License](#License)
 * [Donations](#Donations)
@@ -40,7 +40,7 @@ Overall, Combinare is a powerful library that empowers you to effortlessly gener
 
 ## Installation
 
-To install Laima, run the following command:
+To install Combinare, run the following command:
 
 ```bash
 npm install combinare
