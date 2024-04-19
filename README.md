@@ -1,7 +1,7 @@
 # Combinare
 
 <p align="center">
-  <a href="https://hangell.org/" target="blank"><img src="https://hangell.org/wp-content/uploads/2022/07/hangell.png" width="200" alt="My Bet Logo" /></a>
+  <a href="https://hangell.org/" target="blank"><img src="https://hangell.org/wp-content/uploads/2022/07/hangell.png" width="200" alt="Combinare Logo" /></a>
 </p>
 <p align="center">
 <img src="https://img.shields.io/static/v1?label=STATUS&message=IN%20PRODUCTION&color=RED&style=for-the-badge"/>
