@@ -3,251 +3,327 @@
 <p align="center">
   <a href="https://hangell.org/" target="blank"><img src="https://hangell.org/wp-content/uploads/2022/07/hangell.png" width="200" alt="Combinare Logo" /></a>
 </p>
+
 <p align="center">
-<img src="https://img.shields.io/static/v1?label=STATUS&message=IN%20PRODUCTION&color=RED&style=for-the-badge"/>
-<img src="https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=BLUE&style=for-the-badge"/>
-<img src="https://img.shields.io/static/v1?label=VERSION&message=1.0.0&color=RED&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=STATUS&message=IN%20PRODUCTION&color=GREEN&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=BLUE&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=VERSION&message=1.0.0&color=ORANGE&style=for-the-badge"/>
 </p>
 
-# Introduction
-* [Description](#Description)
-* [Installation](#Installation)
-* [Usage](#Usage)
-* [Generating Unique Combinations of Numbers](#Generating_Unique_Combinations_of_Numbers)
-* [Generating Unique Combinations of Arrays](#Generating_Unique_Combinations_of_Arrays)
-* [Generating Unique Combinations of Objects](#Generating_Unique_Combinations_of_Objects)
-* [Sorting an Array of Objects](#Sorting_an_Array_of_Objects)
-* [Curiosity about the name Combinare](#Curiosity_about_the_name_Combinare)
-* [Contributing](#Contributing)
-* [License](#License)
-* [Donations](#Donations)
-* [Created By](#Created By)
+## 📚 Table of Contents
 
-## Description
+- [Description](#-description)
+- [Installation](#-installation)
+- [Usage](#-usage)
+  - [Basic Import](#basic-import)
+  - [Generating Unique Combinations of Numbers](#generating-unique-combinations-of-numbers)
+  - [Generating Unique Combinations of Arrays](#generating-unique-combinations-of-arrays)
+  - [Generating Unique Combinations of Objects](#generating-unique-combinations-of-objects)
+  - [Sorting Arrays of Objects](#sorting-arrays-of-objects)
+- [API Reference](#-api-reference)
+- [Examples](#-examples)
+- [About the Name](#-about-the-name-combinare)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
+- [Author](#-author)
 
+## 📖 Description
 
-Combinare is a versatile library designed to facilitate the generation of unique combinations, making it a valuable tool in various scenarios. Whether you're looking to estimate possible numbers for a lottery, create combinations for game elements, or use it in the context of factories, Combinare has got you covered.
+**Combinare** is a powerful and versatile TypeScript/JavaScript library designed to simplify the generation of unique combinations across different data types. Whether you're working with numbers, arrays, or objects, Combinare provides efficient methods to create combinations for various use cases.
 
-The library offers a range of functions to generate combinations of numbers, arrays, and objects. With Combinare, you can effortlessly generate unique combinations of numbers within a given range, specifying the desired length and total number of combinations. This feature is particularly useful for tasks like estimating potential lottery numbers.
+### Key Features
 
-In addition to numeric combinations, Combinare enables you to generate unique combinations of arrays. By providing input arrays, you can obtain a comprehensive set of combinations that cover all possible arrangements. This functionality is particularly handy for game development, factory simulations, and other scenarios that involve creating and combining elements.
+- 🔢 **Numeric Combinations**: Generate unique number combinations within specified ranges
+- 📊 **Array Combinations**: Create Cartesian products from multiple arrays
+- 🎯 **Object Combinations**: Generate combinations based on object attributes
+- 🔄 **Flexible Sorting**: Sort object arrays by any attribute with customizable order
+- 🚀 **TypeScript Support**: Full type safety and IntelliSense support
+- 🌐 **Universal**: Works in both browser and Node.js environments
 
-Combinare also supports the generation of combinations with objects based on shared attributes. By supplying an array of objects, you can generate unique combinations that incorporate different attribute values. This capability can be leveraged in a wide range of applications, such as data analysis, algorithmic problem-solving, and more.
+### Use Cases
 
-Furthermore, Combinare offers a sorting function that allows you to order an array of objects based on a specific attribute. You can choose the sorting order, whether ascending or descending, and ensure your objects are organized according to your criteria.
+- **Lottery Systems**: Generate potential number combinations
+- **Game Development**: Create unique item combinations and configurations
+- **Data Analysis**: Generate test scenarios and data permutations
+- **Factory Patterns**: Create combinations of product configurations
+- **Algorithm Testing**: Generate comprehensive test data sets
 
-Overall, Combinare is a powerful library that empowers you to effortlessly generate unique combinations, facilitating tasks such as number estimation, game development, factory simulations, and beyond. Its intuitive functions and versatility make it a valuable asset in a variety of contexts.
+## 🚀 Installation
 
-## Installation
-
-To install Combinare, run the following command:
+Install Combinare using your preferred package manager:
 
 ```bash
+# NPM
 npm install combinare
-# or
+
+# Yarn
 yarn add combinare
+
+# PNPM
+pnpm add combinare
 ```
 
-## Usage
+## 💻 Usage
 
-### Importing Combinare
+### Basic Import
 
-To import combinare, use the following command:
+```javascript
+// CommonJS
+const { Combinare } = require('combinare');
 
-```js
-#js
-const {Combinare} = require('combinare');
-```
-
-```ts
-#ts
-import {Combinare} from 'combinare';
+// ES Modules
+import { Combinare } from 'combinare';
 ```
 
 ### Generating Unique Combinations of Numbers
 
-```js
-const combinationsNumerics = Combinare.generateCombinationsNumerics(25, 15, 10);
-console.log('Numeric Combinations:');
-console.log(combinationsNumerics);
+Perfect for lottery systems, gaming, or any scenario requiring unique numeric combinations.
+
+```javascript
+// Generate 10 unique combinations of 15 numbers from 1 to 25
+const numericCombinations = Combinare.generateCombinationsNumerics(25, 15, 10);
+
+console.log('Numeric Combinations:', numericCombinations);
+// Output:
+// [
+//   [1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 14, 16, 17, 18, 20],
+//   [2, 4, 5, 6, 8, 9, 11, 12, 13, 15, 16, 17, 18, 20, 24],
+//   [1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 21],
+//   // ... 7 more combinations
+// ]
 ```
-
-This function generates unique combinations of numbers within a given range.
-
-* `total` (number): The total number of elements available for generating combinations.
-* `combinationLength` (number): The desired length for each combination.
-* `numberOfCombinations` (number): The total number of combinations to be generated.
-* Returns: An array containing unique combinations of numbers.
-
-The function returns an array containing unique combinations of numbers. Each combination is represented as an array of
-numbers.
-
-Example Output:
-
-```js
-Numeric
-Combinations:
-    [
-        [1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 14, 16, 17, 18, 20],
-        [2, 4, 5, 6, 8, 9, 11, 12, 13, 15, 16, 17, 18, 20, 24],
-        [1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 21],
-        // More combinations...
-    ]
-```
-
-Each combination in the output represents a unique set of numbers within the specified range and length.
 
 ### Generating Unique Combinations of Arrays
 
-```js
-const arrays = [[1, 2], ['a', 'b', 'c'], [true, false]];
+Create Cartesian products from multiple arrays - ideal for configuration generators and game mechanics.
 
-const combinationsArrays = Combinare.generateCombinationsArrays(arrays);
-console.log('Array Combinations:');
-console.log(combinationsArrays);
-```
+```javascript
+const inputArrays = [
+  ['small', 'medium', 'large'],        // sizes
+  ['red', 'blue', 'green'],            // colors
+  [true, false]                        // availability
+];
 
-Generates unique combinations of arrays.
+const arrayCombinations = Combinare.generateCombinationsArrays(inputArrays);
 
-* `arrays` (array): The input arrays to generate combinations.
-* Returns: An array containing unique combinations of arrays.
-
-Example Output:
-
-```js
-Array
-Combinations:
-    [
-        [1, 'a', true],
-        [1, 'a', false],
-        [1, 'b', true],
-        [1, 'b', false],
-        [1, 'c', true],
-        [1, 'c', false],
-        [2, 'a', true],
-        [2, 'a', false],
-        [2, 'b', true],
-        [2, 'b', false],
-        [2, 'c', true],
-        [2, 'c', false]
-    ]
+console.log('Array Combinations:', arrayCombinations);
+// Output:
+// [
+//   ['small', 'red', true],
+//   ['small', 'red', false],
+//   ['small', 'blue', true],
+//   ['small', 'blue', false],
+//   ['small', 'green', true],
+//   ['small', 'green', false],
+//   ['medium', 'red', true],
+//   // ... all possible combinations
+// ]
 ```
 
 ### Generating Unique Combinations of Objects
 
-```js
-const objects = [
-    {name: 'John', age: 25},
-    {name: 'Jane', age: 30},
-    {name: 'Bob', age: 40}
+Generate combinations based on shared object attributes - perfect for data analysis and testing scenarios.
+
+```javascript
+const users = [
+  { name: 'Alice', age: 25, city: 'New York' },
+  { name: 'Bob', age: 30, city: 'London' },
+  { name: 'Charlie', age: 35, city: 'Tokyo' }
 ];
 
-const combinationsObjects = Combinare.generateCombinationsObjects(objects);
-console.log('Object Combinations:');
-console.log(combinationsObjects);
+const objectCombinations = Combinare.generateCombinationsObjects(users);
 
+console.log('Object Combinations:', objectCombinations);
+// Output:
+// [
+//   [{ name: 'Alice', age: 25, city: 'New York' }],
+//   [{ name: 'Alice', age: 30, city: 'New York' }],
+//   [{ name: 'Alice', age: 35, city: 'New York' }],
+//   [{ name: 'Bob', age: 25, city: 'New York' }],
+//   [{ name: 'Bob', age: 30, city: 'London' }],
+//   // ... all combinations of attributes
+// ]
 ```
 
-Generates unique combinations of objects based on shared attributes. Only combines attributes existing in the objects.
+### Sorting Arrays of Objects
 
-* `objects` (array): The input objects to generate combinations.
-* Returns: An array containing unique combinations of objects.
+Sort object arrays by any attribute with ascending or descending order.
 
-```js
-Object_Combinations:
-    [
-        [{name: 'John', age: 25}],
-        [{name: 'John', age: 30}],
-        [{name: 'John', age: 40}],
-        [{name: 'Jane', age: 25}],
-        [{name: 'Jane', age: 30}],
-        [{name: 'Jane', age: 40}],
-        [{name: 'Bob', age: 25}],
-        [{name: 'Bob', age: 30}],
-        [{name: 'Bob', age: 40}]
-    ]
-```
-
-### Sorting an Array of Objects by an Attribute
-
-```js
-const objects = [
-    {name: 'John', age: 25},
-    {name: 'Jane', age: 30},
-    {name: 'Bob', age: 40}
+```javascript
+const products = [
+  { name: 'Laptop', price: 999, inStock: true },
+  { name: 'Mouse', price: 25, inStock: false },
+  { name: 'Keyboard', price: 75, inStock: true }
 ];
 
-const sortedObjects = Combinare.sortByObjectForAttribute(objects, 'age', 'asc');
-console.log('Sorted Objects:');
-console.log(sortedObjects);
+// Sort by price (ascending)
+const sortedByPrice = Combinare.sortByObjectForAttribute(products, 'price', 'asc');
 
+console.log('Sorted by Price:', sortedByPrice);
+// Output:
+// [
+//   { name: 'Mouse', price: 25, inStock: false },
+//   { name: 'Keyboard', price: 75, inStock: true },
+//   { name: 'Laptop', price: 999, inStock: true }
+// ]
+
+// Sort by stock status (descending - true first)
+const sortedByStock = Combinare.sortByObjectForAttribute(products, 'inStock', 'desc');
 ```
 
-Sorts an array of objects by the value of a specific attribute.
+## 📋 API Reference
 
-* `array` (array): The array of objects to be sorted.
-* `attribute` (string): The name of the attribute by which the array should be sorted.
-* `order` ('asc' | 'desc'): The sorting order, which can be 'asc' for ascending or 'desc' for descending.
-* Returns: A new array with the objects sorted by the specified attribute.
+### `generateCombinationsNumerics(total, combinationLength, numberOfCombinations)`
 
-Example Output:
+Generates unique combinations of numbers within a specified range.
 
-```js
-Sorted_Objects:
-    [
-        {name: 'John', age: 25},
-        {name: 'Jane', age: 30},
-        {name: 'Bob', age: 40}
-    ]
+**Parameters:**
+- `total` (number): Total number of elements available (creates range 1 to total)
+- `combinationLength` (number): Length of each combination
+- `numberOfCombinations` (number): Number of unique combinations to generate
+
+**Returns:** `number[][]` - Array of unique number combinations
+
+---
+
+### `generateCombinationsArrays<T>(arrays)`
+
+Generates all possible combinations from multiple arrays (Cartesian product).
+
+**Parameters:**
+- `arrays` (T[][]): Array of arrays to combine
+
+**Returns:** `T[][]` - Array containing all possible combinations
+
+---
+
+### `generateCombinationsObjects<T>(objects)`
+
+Generates unique combinations of objects based on their shared attributes.
+
+**Parameters:**
+- `objects` (T[]): Array of objects with shared properties
+
+**Returns:** `T[][]` - Array of object combinations with all attribute variations
+
+---
+
+### `sortByObjectForAttribute<T>(arr, attribute, order)`
+
+Sorts an array of objects by a specific attribute.
+
+**Parameters:**
+- `arr` (T[]): Array of objects to sort
+- `attribute` (string): Attribute name to sort by
+- `order` ('asc' | 'desc'): Sorting order
+
+**Returns:** `T[]` - New sorted array
+
+**Supported Types:** string, number, boolean
+
+## 🎯 Examples
+
+### Lottery Number Generator
+
+```javascript
+// Generate 5 lottery tickets with 6 numbers each (1-49)
+const lotteryTickets = Combinare.generateCombinationsNumerics(49, 6, 5);
+lotteryTickets.forEach((ticket, index) => {
+  console.log(`Ticket ${index + 1}: ${ticket.join(', ')}`);
+});
 ```
 
-## Curiosity about the name Combinare
+### Product Configuration Generator
 
-The name "Combinare" was chosen for this library to reflect its purpose and the concept it embodies. "Combinare" is derived from the Latin word "combinare," which means "to combine" or "to join together."
+```javascript
+const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+const colors = ['Black', 'White', 'Navy', 'Gray'];
+const styles = ['Regular', 'Slim', 'Relaxed'];
 
-The essence of this library is to generate unique combinations by combining different elements or arrays. It provides powerful functionalities to generate combinations of numbers, arrays, and objects based on shared attributes.
+const productConfigs = Combinare.generateCombinationsArrays([sizes, colors, styles]);
+console.log(`Generated ${productConfigs.length} product configurations`);
+```
 
-By using the Latin word "combinare" as the name, the library encapsulates the idea of bringing together elements in various ways to create unique combinations. It highlights the core functionality and purpose of the library, making it intuitive and memorable for users.
+### User Testing Scenarios
 
-The name "Combinare" serves as a reminder of the library's capability to facilitate the generation of combinations and reflects its origin in the concept of combination from the Latin language.
+```javascript
+const testUsers = [
+  { role: 'admin', experience: 'beginner', device: 'mobile' },
+  { role: 'user', experience: 'expert', device: 'desktop' },
+  { role: 'guest', experience: 'intermediate', device: 'tablet' }
+];
 
-## Contributing
+const testScenarios = Combinare.generateCombinationsObjects(testUsers);
+console.log(`Created ${testScenarios.length} test scenarios`);
+```
 
-Contributions are welcome! If you have any improvements or new features you'd like to add to Laima, please follow these
-steps:
+## 🤔 About the Name "Combinare"
 
-1. Fork the repository.
-2. Create a new branch for your feature or improvement.
-3. Make the necessary changes and commit them.
-4. Push your branch to your forked repository.
-5. Submit a pull request to the main repository.
+The name **"Combinare"** derives from the Latin word meaning "to combine" or "to join together." This perfectly captures the library's essence: bringing together different elements to create unique combinations.
 
-* Please ensure that your code follows the established coding conventions and includes appropriate tests for any new
-  functionality.
+By choosing this Latin root, we emphasize the fundamental mathematical and logical concept of combination that the library implements, making it both memorable and meaningful for developers working with combinatorial problems.
 
-## License
+## 🤝 Contributing
 
-Combinare is licensed under the MIT license. Please refer to the LICENSE file for more information.
+We welcome contributions! Here's how you can help improve Combinare:
 
-## Donations
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. **Push** to the branch: `git push origin feature/amazing-feature`
+5. **Open** a Pull Request
 
-If you enjoyed using Laima, please consider making a donation to support the continuous development of the project. You
-can make a donation using one of the following options:
+### Development Guidelines
 
-* Pix: rodrigo@hangell.org
+- Follow TypeScript best practices
+- Add tests for new functionality
+- Update documentation as needed
+- Ensure backward compatibility
+- Follow the existing code style
 
-* Cryptocurrencies or nft MetaMask: 0xEd4d1be72F807Faa358C966a8eF63367c200130F
+## 📄 License
 
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
+## 💖 Support
 
-## Created By
+If you find Combinare helpful, consider supporting its development:
 
-![Created By](https://hangell.org/wp-content/uploads/2022/04/rodrigorangel.jpeg)
-<div>
-<a href="https://hangell.org" target="_blank"><img src="https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white" target="_blank"></a>
-  <a href="https://play.google.com/store/apps/dev?id=5606456325281613718" target="_blank"><img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" target="_blank"></a>
-  <a href="https://www.youtube.com/channel/UC8_zG7RFM2aMhI-p-6zmixw" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" target="_blank"></a>
-  <a href="https://www.facebook.com/hangell.org" target="_blank"><img src="	https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" target="_blank"></a>
-  <a href="https://www.linkedin.com/in/rodrigo-rangel-a80810170" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+**PIX (Brazil):** `rodrigo@hangell.org`
 
+**Cryptocurrency/NFT:** `0xEd4d1be72F807Faa358C966a8eF63367c200130F`
+
+Your support helps maintain and improve this open-source project!
+
+## 👨‍💻 Author
+
+<div align="center">
+  <img src="https://hangell.org/wp-content/uploads/2022/04/rodrigorangel.jpeg" width="150" style="border-radius: 50%;" />
+
+**Rodrigo Rangel**
+
+  <div>
+    <a href="https://hangell.org" target="_blank">
+      <img src="https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white" alt="Website" />
+    </a>
+    <a href="https://play.google.com/store/apps/dev?id=5606456325281613718" target="_blank">
+      <img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" alt="Google Play" />
+    </a>
+    <a href="https://www.youtube.com/channel/UC8_zG7RFM2aMhI-p-6zmixw" target="_blank">
+      <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
+    </a>
+    <a href="https://www.facebook.com/hangell.org" target="_blank">
+      <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" />
+    </a>
+    <a href="https://www.linkedin.com/in/rodrigo-rangel-a80810170" target="_blank">
+      <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    </a>
+  </div>
+</div>
+
+---
+
+<div align="center">
+  <strong>Made with ❤️ for the developer community</strong>
 </div>
