@@ -299,7 +299,7 @@ Your support helps maintain and improve this open-source project!
 ## 👨‍💻 Author
 
 <div align="center">
-  <img src="https://hangell.org/wp-content/uploads/2022/04/rodrigorangel.jpeg" width="150" style="border-radius: 50%;" />
+  <img src="https://avatars.githubusercontent.com/u/53544561?v=4" width="150" style="border-radius: 50%;" />
 
 **Rodrigo Rangel**
 
