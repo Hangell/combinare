@@ -1,33 +1,33 @@
+import { integer } from './core/validation';
+
+/** Legacy deep-import helpers; prefer the package's public exports. */
 export class Utils {
-    static generateArray(total: number): number[] {
-        let array: number[] = [];
-        for (let i = 1; i <= total; i++) {
-            array.push(i);
-        }
-        return array;
+  static generateArray(total: number): number[] {
+    integer(total, 'total');
+    if (total > 1_000_000) throw new RangeError('total exceeds 1000000');
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  static getRandomSubset(
+    array: readonly number[],
+    subsetLength: number
+  ): number[] {
+    integer(subsetLength, 'subsetLength');
+    if (subsetLength > array.length)
+      throw new RangeError('subsetLength exceeds array length');
+    const copy = [...array];
+    for (let i = 0; i < subsetLength; i++) {
+      const index = i + Math.floor(Math.random() * (copy.length - i));
+      [copy[i], copy[index]] = [copy[index]!, copy[i]!];
     }
-
-    static getRandomSubset(array: number[], subsetLength: number): number[] {
-        let copy = [...array];
-        let result: number[] = [];
-        for (let i = 0; i < subsetLength; i++) {
-            let randomIndex = Math.floor(Math.random() * copy.length);
-            result.push(copy.splice(randomIndex, 1)[0]);
-        }
-        return result;
-    }
-
-    static arraysAreEqual(arr1: number[], arr2: number[]): boolean {
-        if (arr1.length !== arr2.length) {
-            return false;
-        }
-
-        for (let i = 0; i < arr1.length; i++) {
-            if (arr1[i] !== arr2[i]) {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    return copy.slice(0, subsetLength);
+  }
+  static arraysAreEqual(
+    left: readonly number[],
+    right: readonly number[]
+  ): boolean {
+    return (
+      left.length === right.length &&
+      left.every((value, i) => value === right[i])
+    );
+  }
 }

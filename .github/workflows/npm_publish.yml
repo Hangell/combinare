@@ -1,37 +1,60 @@
 name: Publish to npm
-
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: npm-publish-main
+  cancel-in-progress: false
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-
+    env:
+      HUSKY: '0'
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: npm install --ignore-scripts
-
-      - name: Build (if necessary)
-        run: npm run build
-
-      - name: Prepare package for publishing
-        run: npm run prepublishOnly
-
-      - name: Change to dist directory
-        run: cd dist
-
-      - name: Publish to npm
-        run: npm publish
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run check
+      - name: Generate npm package from repository root
+        id: pack
+        run: |
+          npm pack --json > "$RUNNER_TEMP/npm-pack.json"
+          node -e "const fs = require('node:fs'); const [pack] = JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + '/npm-pack.json', 'utf8')); fs.appendFileSync(process.env.GITHUB_OUTPUT, 'filename=' + pack.filename + '\n');"
+      - name: Save generated package
+        uses: actions/upload-artifact@v4
+        with:
+          name: combinare-${{ github.sha }}
+          path: ${{ steps.pack.outputs.filename }}
+          if-no-files-found: error
+      - name: Check whether package version is already published
+        id: version
+        run: |
+          node <<'NODE'
+          const { spawnSync } = require('node:child_process');
+          const { appendFileSync } = require('node:fs');
+          const { name, version } = require('./package.json');
+          const result = spawnSync('npm', ['view', `${name}@${version}`, 'version', '--json'], { encoding: 'utf8' });
+          if (result.error) throw result.error;
+          if (result.status === 0) {
+            if (JSON.parse(result.stdout) !== version) throw new Error('Unexpected registry version');
+            console.log(`${name}@${version} is already published; the package artifact is available, but publication is skipped.`);
+            appendFileSync(process.env.GITHUB_OUTPUT, 'publish=false\n');
+          } else {
+            const error = JSON.parse(result.stdout).error;
+            if (error?.code !== 'E404') throw new Error(result.stderr || 'Registry lookup failed');
+            appendFileSync(process.env.GITHUB_OUTPUT, 'publish=true\n');
+          }
+          NODE
+      - name: Publish generated package to npm
+        if: steps.version.outputs.publish == 'true'
+        run: npm publish "./$PACKAGE_FILE" --tag "$NPM_TAG"
         env:
+          PACKAGE_FILE: ${{ steps.pack.outputs.filename }}
+          NPM_TAG: latest
           NODE_AUTH_TOKEN: ${{ secrets.KEY_COMBINARE }}
